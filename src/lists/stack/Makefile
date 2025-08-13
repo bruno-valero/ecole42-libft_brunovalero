@@ -1,6 +1,8 @@
 NAME = libft.a
+DOUBLE_LIST = src/lists/double_list/libdouble_list.a
+INCLUDES = -I src/lists/double_list
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 FUNCTIONS = ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isalnum.c \
@@ -49,8 +51,16 @@ OBJ := $(FUNCTIONS:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	ar rcs $@ $^
+# DEPENDENCIES
+$(DOUBLE_LIST):
+	@make -C $(shell dirname $@)
+
+$(NAME): $(OBJ) $(DOUBLE_LIST)
+	@$(eval DOUBLE_LIST_OBJS := $(shell ar -t $(DOUBLE_LIST)))
+	@ar rcs $(NAME) $(OBJ) $(addprefix libft/, $(DOUBLE_LIST_OBJS))
+
+%.a:
+	make -C $(dirname $@)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
