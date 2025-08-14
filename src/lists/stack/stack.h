@@ -19,16 +19,20 @@ typedef struct s_stack_node
 {
 	void				*content;
 	struct s_stack_node	*next;
+	struct s_stack_node	*prev;
 }	t_stack_node;
 
 typedef struct s_stack
 {
-	int				length;
-	t_stack_node	*head;
-	t_stack_node	*tail;
-	// void			(*swap_first_node)(t_stack *stack, t_stack_node *self);
+	unsigned int	length;
+	t_stack_node	**bottom;
+	t_stack_node	**top;
+	int				(*swap_first_node)(t_stack *stack, t_stack_node **node);
+	int				(*swap_tops)(t_stack **self, t_stack **other_stack);
+	int				(*rotate)(t_stack **self, int reverse);
 }	t_stack;
 
 t_stack_node	*new_stak_node(void *content);
+t_stack			*new_stack();
 
 #endif
