@@ -2,6 +2,11 @@
 
 #include <stdio.h>
 
+void	del_node_content(void *content)
+{
+	content = NULL;
+}
+
 int main()
 {
 	t_stack *stack = new_stack();
@@ -24,11 +29,15 @@ int main()
 	// ------------------------------------
 	current = stack2->pop(stack2);
 	printf("pointer = %p, data = %d\n", current->content, *(int *)current->content);
+	stack->push(stack, current);
 	// ------------------------------------
 	current = stack2->pop(stack2);
 	printf("pointer = %p, data = %d\n", current->content, *(int *)current->content);
+	stack->push(stack, current);
 	// ------------------------------------
 	current = stack2->pop(stack2);
 	printf("pointer = %p, data = %d\n", current->content, *(int *)current->content);
-	// swap_first_node(&three);
+	stack->push(stack, current);
+	stack->destroy(&stack, del_node_content);
+	stack2->destroy(&stack2, del_node_content);
 }
