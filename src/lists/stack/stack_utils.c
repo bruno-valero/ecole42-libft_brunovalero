@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valero <valero@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:06:57 by valero            #+#    #+#             */
-/*   Updated: 2025/08/14 18:08:03 by valero           ###   ########.fr       */
+/*   Updated: 2025/08/15 19:18:58 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-t_stack	*new_stack()
+t_stack	*new_stack(void)
 {
-	t_stack *stack;
+	t_stack	*stack;
 
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	stack->length = 0;
-	stack->bottom_ref = NULL;
-	stack->top_ref = NULL;
+	stack->bottom = NULL;
+	stack->top = NULL;
 	stack->create_node = stack_new_node;
 	stack->swap_first_node = stack_swap_first_node;
 	stack->rotate = stack_rotate;
@@ -27,6 +27,7 @@ t_stack	*new_stack()
 	stack->pop = stack_pop;
 	stack->transfer_top = stack_transfer_top;
 	stack->destroy = stack_destroy;
+	stack->detach_node = stack_detach_node;
 	return (stack);
 }
 
@@ -64,7 +65,7 @@ int	stack_destroy(t_stack **self_ref, void (*del_node_content)(void *content))
 		return (0);
 	while (self->length)
 	{
-		popped_node = self->pop(self_ref);
+		popped_node = self->pop(self);
 		stack_delete_node(&popped_node, del_node_content);
 	}
 	free(self);

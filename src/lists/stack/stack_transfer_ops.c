@@ -3,70 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   stack_transfer_ops.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valero <valero@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:04:52 by valero            #+#    #+#             */
-/*   Updated: 2025/08/14 18:25:12 by valero           ###   ########.fr       */
+/*   Updated: 2025/08/15 19:00:54 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-int	stack_push(t_stack **self_ref, t_stack_node **node_ref)
+int	stack_push(t_stack *self, t_stack_node *node)
 {
-	// t_stack			*self;
-	// t_stack_node	*node;
-
-	// self = *self_ref;
-	// node = *node_ref;
-	if (!self_ref || !*self_ref || !node_ref || !(*node_ref))
+	if (!self || !node)
 		return (0);
-	(*node_ref)->next = NULL;
-	(*self_ref)->length++;
-	if ((*self_ref)->length == 1)
-	{
-		(*self_ref)->bottom_ref = node_ref;
-		(*self_ref)->top_ref = node_ref;
-		(*node_ref)->prev = NULL;
-		return (1);
-	}
-	(*(*self_ref)->top_ref)->next = (*node_ref);
-	(*node_ref)->prev = *(*self_ref)->top_ref;
-	(*self_ref)->top_ref = node_ref;
+	node->next = NULL;
+	node->prev = self->top;
+	if (!self->length)
+		self->bottom = node;
+	else
+		self->top->next = node;
+	self->top = node;
+	self->length++;
 	return (1);
 }
 
-t_stack_node	*stack_pop(t_stack **self_ref)
+t_stack_node	*stack_pop(t_stack *self)
 {
-	// t_stack			*self;
 	t_stack_node	*popped_node;
 
-	// self = *self_ref;
-	if (!self_ref || !(*self_ref) || !(*self_ref)->length)
+	if (!self || !self->top)
 		return (NULL);
-	(*self_ref)->length--;
-	popped_node = *(*self_ref)->top_ref;
-	*(*self_ref)->top_ref = popped_node->prev;
-	popped_node->next = NULL;
-	popped_node->prev = NULL;
+	popped_node = self->detach_node(self, self->top);
+	if (!popped_node)
+		return (NULL);
 	return (popped_node);
 }
 
-int	stack_transfer_top(t_stack **self_ref, t_stack **other_stack_ref)
+int	stack_transfer_top(t_stack *self, t_stack *other_stack)
 {
-	t_stack			*self;
-	t_stack			*other_stack;
 	t_stack_node	*transfered_node;
-	int				transference_succeeded;
+	int				push_succeeded;
 
 	transfered_node = NULL;
-	self = *self_ref;
-	other_stack = *other_stack_ref;
-	if (!self_ref || !self || !other_stack_ref || !other_stack || !self->length)
+	if (!self || !other_stack || !self->length)
 		return (0);
-	transfered_node = self->pop(self_ref);
-	transference_succeeded = other_stack->push(other_stack_ref, &transfered_node);
-	if (!transference_succeeded)
-		self->push(self_ref, &transfered_node);
-	return (transference_succeeded);
+	transfered_node = self->pop(self);
+	if (!transfered_node)
+		return (0);
+	push_succeeded = other_stack->push(other_stack, transfered_node);
+	if (!push_succeeded)
+		self->push(self, transfered_node);
+	return (push_succeeded);
 }
