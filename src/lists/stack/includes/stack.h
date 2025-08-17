@@ -37,6 +37,10 @@ typedef struct s_stack
 	int				(*destroy)(struct s_stack **self_ref,
 			void (*del_node_content)(void *content));
 	t_stack_node	*(*detach_node)(struct s_stack *self, t_stack_node *node);
+	int				(*includes)(struct s_stack *self, void *content,
+			int (*is_equal)(void *self_content, void *content));
+	int				(*push_unique)(struct s_stack *self, t_stack_node *node,
+			int (*is_equal)(void *self_content, void *content));
 }	t_stack;
 
 t_stack			*new_stack(void);
@@ -49,5 +53,9 @@ int				stack_transfer_top(t_stack *self, t_stack *other_stack);
 int				stack_destroy(t_stack **self_ref,
 					void (*del_node_content)(void *content));
 t_stack_node	*stack_detach_node(t_stack *self, t_stack_node *node);
+int				stack_includes(t_stack *self, void *content,
+					int (*is_equal)(void *self_content, void *content));
+int				stack_push_unique(t_stack *self, t_stack_node *node,
+					int (*is_equal)(void *self_content, void *content));
 
 #endif

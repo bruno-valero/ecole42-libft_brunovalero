@@ -3,7 +3,7 @@ INCLUDES = -I includes
 CC = cc
 CFLAGS = -Wall -Werror -Wextra $(INCLUDES)
 SRC = src
-SRC_FILES = stack_swap_ops.c stack_transfer_ops.c stack_utils.c
+SRC_FILES = stack_swap_ops.c stack_transfer_ops.c stack_utils.c stack_index_ops.c
 OBJ = obj
 OBJ_FILES := $(SRC_FILES:%.c=$(OBJ)/%.o)
 

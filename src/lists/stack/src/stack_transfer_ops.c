@@ -6,7 +6,7 @@
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:04:52 by valero            #+#    #+#             */
-/*   Updated: 2025/08/15 19:00:54 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:59:51 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ int	stack_push(t_stack *self, t_stack_node *node)
 	self->top = node;
 	self->length++;
 	return (1);
+}
+
+#include <stdio.h>
+int	stack_push_unique(t_stack *self, t_stack_node *node,
+		int (*is_equal)(void *self_content, void *content))
+{
+	if (self->includes(self, node->content, is_equal))
+		return (0);
+	return (self->push(self, node));
 }
 
 t_stack_node	*stack_pop(t_stack *self)

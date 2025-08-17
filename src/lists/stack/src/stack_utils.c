@@ -6,7 +6,7 @@
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 15:06:57 by valero            #+#    #+#             */
-/*   Updated: 2025/08/15 19:18:58 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:44:32 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_stack	*new_stack(void)
 	stack->transfer_top = stack_transfer_top;
 	stack->destroy = stack_destroy;
 	stack->detach_node = stack_detach_node;
+	stack->includes = stack_includes;
+	stack->push_unique = stack_push_unique;
 	return (stack);
 }
 
@@ -42,7 +44,8 @@ t_stack_node	*stack_new_node(void *content)
 	return (new_node);
 }
 
-static int	stack_delete_node(t_stack_node **node_ref, void (*del_node_content)(void *content))
+static int	stack_delete_node(t_stack_node **node_ref,
+		void (*del_node_content)(void *content))
 {
 	t_stack_node	*node;
 
