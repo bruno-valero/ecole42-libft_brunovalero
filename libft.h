@@ -6,7 +6,7 @@
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:35:01 by brunofer          #+#    #+#             */
-/*   Updated: 2025/07/25 15:46:32 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:03:05 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "stack.h"
 
 typedef struct s_list
 {

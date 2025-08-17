@@ -1,8 +1,9 @@
 NAME = libft.a
 STACK_PATH = src/lists/stack
 STACK = $(STACK_PATH)/libstack.a
+INCLUDES = -I $(STACK_PATH)/includes
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra $(INCLUDES)
 FUNCTIONS = ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isalnum.c \
@@ -57,7 +58,7 @@ $(STACK):
 
 $(NAME): $(OBJ_FILES)
 	@ar x $(STACK) --output $(DEPENDENCY_OBJS)
-	@ar rcs $@ $^ $(shell DEPENDENCY_OBJS/*.o)
+	@ar rcs $@ $^ $(DEPENDENCY_OBJS)/*.o
 
 $(OBJ):
 	@mkdir $(OBJ)
@@ -78,4 +79,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re so
+.PHONY: all clean fclean re
