@@ -7,36 +7,65 @@ void	del_node_content(void *content)
 	content = NULL;
 }
 
+void print_stack(t_stack *self)
+{
+	t_stack_node	*stack;
+	int				idx;
+
+	stack = self->top;
+	idx = 0;
+	printf("item %d = %d\n", idx, *(int *)stack->content);
+	printf("self->top = %p\n", self->top);
+	printf("self->top->prev = %p\n", self->top->prev->prev);
+	while (stack)
+	{
+		printf("item %d = %d\n", idx, *(int *)stack->content);
+		stack = stack->prev;
+		idx++;
+	}
+}
+
 int	is_equal(void *self_content, void *content)
 {
+	// printf("self_content = %d, content = %d\n", *(int *)self_content, *(int *)content);
 	return (*(int *)self_content == *(int *)content);
+}
+
+t_stack_node *make_stack(t_stack *stack, int nbrs[20], int idx)
+{
+	return (stack->create_node(&(nbrs[idx])));
 }
 
 int main()
 {
 	t_stack *stack = new_stack();
 	t_stack *stack2 = new_stack();
-	int	numbers[4] = {3, 2, 4, 9};
-	t_stack_node *three = stack->create_node(&(numbers[0]));
-	t_stack_node *two = stack->create_node(&(numbers[1]));
-	t_stack_node *four = stack->create_node(&(numbers[2]));
-	t_stack_node *nine = stack->create_node(&(numbers[3]));
+	int	nbrs[20] = {0, 1, 2, 3, 4, 5, 6 ,7 ,8, 9, 10, 11, 12, 13, 14, 15};
+	// t_stack_node *three = stack->create_node(&(nbrs[0]));
+	// t_stack_node *two = stack->create_node(&(nbrs[1]));
+	// t_stack_node *four = stack->create_node(&(nbrs[2]));
+	// t_stack_node *nine = stack->create_node(&(nbrs[3]));
 
-	t_stack_node *current;
+
 	// printf("pointer = %p, data = %d", three->content, *(int *)three->content);
-	stack->push(stack, three);
-	stack->push(stack, two);
-	stack->push(stack, four);
-	stack->push_unique(stack, three, is_equal);
-	printf("oi\n");
-	stack->push(stack, three);
-	stack->push_unique(stack, three, is_equal);
-	stack->push_unique(stack, nine, is_equal);
+	stack->push(stack, make_stack(stack, nbrs, 3));
+	stack->push(stack, make_stack(stack, nbrs, 2));
+	stack->push(stack, make_stack(stack, nbrs, 2));
+	stack->push_unique(stack, make_stack(stack, nbrs, 3), is_equal);
+	stack->push(stack, make_stack(stack, nbrs, 2));
+	stack->push(stack, make_stack(stack, nbrs, 3));
+	stack->push(stack, make_stack(stack, nbrs, 3));
+	stack->push(stack, make_stack(stack, nbrs, 9));
+	stack->push_unique(stack, make_stack(stack, nbrs, 3), is_equal);
+	stack->push_unique(stack, make_stack(stack, nbrs, 9), is_equal);
 
-	int eight = 8;
-	int includes = stack->includes(stack, &eight, is_equal);
+	// printf("bottom->prev = %p\n", stack->bottom->prev);
+	print_stack(stack);
+
+
+	int includes = stack->includes(stack, &nbrs[8], is_equal);
 	printf("stack includes 8 = %d\n", includes);
-	includes = stack->includes(stack, &(numbers[1]), is_equal);
+	includes = stack->includes(stack, &(nbrs[2]), is_equal);
 	printf("stack includes 2 = %d\n", includes);
 
 	stack->transfer_top(stack, stack2);
@@ -44,6 +73,7 @@ int main()
 	stack->transfer_top(stack, stack2);
 	// stack->rotate(&stack, 1);
 	// ------------------------------------
+	t_stack_node *current;
 	current = stack2->pop(stack2);
 	printf("pointer = %p, data = %d\n", current->content, *(int *)current->content);
 	stack->push(stack, current);
