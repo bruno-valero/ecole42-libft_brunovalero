@@ -1,4 +1,6 @@
 NAME = libft.a
+STACK_PATH = src/lists/stack
+STACK = $(STACK_PATH)/libstack.a
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g3
 FUNCTIONS = ft_isalpha.c \
@@ -44,21 +46,34 @@ FUNCTIONS = ft_isalpha.c \
 			ft_lstclear_bonus.c \
 			ft_lstiter_bonus.c \
 			ft_lstmap_bonus.c
+OBJ = obj
+OBJ_FILES := $(FUNCTIONS:%.c=$(OBJ)/%.o)
+DEPENDENCY_OBJS = dependency_objs
 
-OBJ := $(FUNCTIONS:%.c=%.o)
+all: $(STACK) $(OBJ) $(DEPENDENCY_OBJS) $(NAME)
 
-all: $(NAME)
+$(STACK):
+	@make -C $(STACK_PATH)
 
-$(NAME): $(OBJ)
-	ar rcs $@ $^
+$(NAME): $(OBJ_FILES)
+	@ar x $(STACK) --output $(DEPENDENCY_OBJS)
+	@ar rcs $@ $^ $(shell DEPENDENCY_OBJS/*.o)
 
-%.o: %.c
+$(OBJ):
+	@mkdir $(OBJ)
+
+$(DEPENDENCY_OBJS):
+	mkdir $(DEPENDENCY_OBJS)
+
+$(OBJ)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf *.o
+	make -C $(STACK_PATH) clean
+	rm -rf $(OBJ) $(DEPENDENCY_OBJS)
 
 fclean: clean
+	make -C $(STACK_PATH) fclean
 	rm -rf $(NAME)
 
 re: fclean all
