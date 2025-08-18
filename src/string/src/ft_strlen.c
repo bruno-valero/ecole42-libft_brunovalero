@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/07/27 12:01:26 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:49:42 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
-char	*ft_strrchr(const char *s, int c)
+size_t	ft_strlen(const char *str)
 {
-	int	last_position;
-	int	i;
+	size_t	len;
 
-	c = c % 256;
-	last_position = -1;
-	i = -1;
-	while (s[++i])
-		if (s[i] == c)
-			last_position = i;
-	if (s[i] == c)
-			last_position = i;
-	if (last_position == -1)
-		return (NULL);
-	return ((char *)&s[last_position]);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }

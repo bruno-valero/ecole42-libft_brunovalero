@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
 static int		nbrlen(long int nbr, int is_negative);
 static void		number_to_string(long int nbr, int nbr_len,
@@ -34,6 +34,17 @@ char	*ft_itoa(int n)
 		return (NULL);
 	number_to_string(nbr, nbr_len, is_negative, str_nbr);
 	return (str_nbr);
+}
+
+static void	handle_negative(int *is_negative, long int *nbr)
+{
+	if (*nbr < 0)
+	{
+		*nbr *= -1;
+		*is_negative = 1;
+	}
+	else
+		*is_negative = 0;
 }
 
 static int	nbrlen(long int nbr, int is_negative)
@@ -63,15 +74,4 @@ static void	number_to_string(long int nbr, int nbr_len,
 		str_nbr[nbr_len] = last_digit + '0';
 		nbr /= 10;
 	}
-}
-
-static void	handle_negative(int *is_negative, long int *nbr)
-{
-	if (*nbr < 0)
-	{
-		*nbr *= -1;
-		*is_negative = 1;
-	}
-	else
-		*is_negative = 0;
 }

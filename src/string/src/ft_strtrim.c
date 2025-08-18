@@ -6,11 +6,11 @@
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/07/27 12:12:42 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:49:53 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
 static int		is_valid_char(char c, char const *set);
 static int		*fill_coords(char const *s1, char const *set, int *coords);

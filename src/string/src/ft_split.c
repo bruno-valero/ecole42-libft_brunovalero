@@ -6,11 +6,11 @@
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 19:49:18 by brunofer          #+#    #+#             */
-/*   Updated: 2025/07/30 09:26:36 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 18:41:08 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
 static char	**run_split(char const *s, int	*coord_arr, int coord_arr_len);
 static void	delete_words(char **str, int end);
@@ -25,7 +25,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	coord_arr = (int *)ft_calloc(ft_strlen((char *)s) + 1, sizeof(int));
+	coord_arr = (int *)malloc(ft_strlen((char *)s), sizeof(int));
 	if (!coord_arr)
 		return (NULL);
 	coord_arr_len = 0;
@@ -69,26 +69,26 @@ static void	delete_words(char **str, int end)
 static int	split_with_coords(char const *src,
 		int *coord_arr, int coord_arr_len, char **words)
 {
-	int	i_words;
+	int	i_coord;
 	int	i_src;
 	int	i_current_word;
 
-	i_words = -1;
-	while (++i_words < (coord_arr_len / 2))
+	i_coord = -1;
+	while (++i_coord < coord_arr_len)
 	{
-		words[i_words] = malloc(
-				coord_arr[i_words * 2 + 1] - coord_arr[i_words * 2] + 2
+		words[i_coord / 2] = malloc(
+				coord_arr[i_coord + 1] - coord_arr[i_coord] + 2
 				);
-		if (!words[i_words])
+		if (!words[i_coord])
 		{
-			delete_words(words, i_words - 1);
+			delete_words(words, i_coord - 1);
 			return (0);
 		}
-		i_src = coord_arr[i_words * 2];
+		i_src = coord_arr[i_coord * 2];
 		i_current_word = 0;
-		while (i_src <= coord_arr[i_words * 2 + 1])
-			words[i_words][i_current_word++] = src[i_src++];
-		words[i_words][i_current_word] = '\0';
+		while (i_src <= coord_arr[i_coord * 2 + 1])
+			words[i_coord][i_current_word++] = src[i_src++];
+		words[i_coord / 2][i_current_word] = '\0';
 	}
 	return (1);
 }

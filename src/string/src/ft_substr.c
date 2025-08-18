@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/07/27 11:50:09 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:49:56 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	len_src;
+	int				size;
+	unsigned int	len_str;
+	char			*sub;
 
-	len_src = ft_strlen(src);
-	if (!size)
-		return (len_src);
-	i = -1;
-	while (++i < (size - 1) && src[i])
-		dst[i] = src[i];
-	dst[i] = '\0';
-	return (len_src);
+	if ((!s && !start))
+		return (NULL);
+	len_str = (unsigned int)ft_strlen(s);
+	if (!s || (start > len_str))
+		return ((char *)ft_calloc(1, 1));
+	size = len;
+	if (len > (len_str - start))
+		size = len_str - start;
+	sub = (char *)ft_calloc(size + 1, 1);
+	if (!sub)
+		return (NULL);
+	ft_strlcpy(sub, &s[start], size + 1);
+	return (sub);
 }

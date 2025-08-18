@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/07/25 15:46:07 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:50:41 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "string.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_toupper(int c)
 {
-	size_t	i;
-
-	if (!n)
-		return (0);
-	i = 0;
-	while ((s1[i] && s1[i] == s2[i]) && i < n - 1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }
