@@ -3,7 +3,7 @@ NAME = libft.a
 STACK_PATH = src/lists/stack
 STACK = $(STACK_PATH)/libstack.a
 # ----------
-LIBSTR_PATH = src/str
+LIBSTR_PATH = src/libstr
 LIBSTR = $(LIBSTR_PATH)/libstr.a
 # ********************************************************************
 INCLUDES = -I $(STACK_PATH)/includes -I $(LIBSTR_PATH)/includes
