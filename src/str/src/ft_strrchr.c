@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:12 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-int	ft_isalpha(int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	int	last_position;
+	int	i;
+
+	c = c % 256;
+	last_position = -1;
+	i = -1;
+	while (s[++i])
+		if (s[i] == c)
+			last_position = i;
+	if (s[i] == c)
+			last_position = i;
+	if (last_position == -1)
+		return (NULL);
+	return ((char *)&s[last_position]);
 }

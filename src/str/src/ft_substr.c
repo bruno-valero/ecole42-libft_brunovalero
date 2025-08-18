@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:29 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	c = c % 256;
-	while (*s)
+	int				size;
+	unsigned int	len_str;
+	char			*sub;
+
+	if ((!s && !start))
+		return (NULL);
+	len_str = (unsigned int)ft_strlen(s);
+	if (!s || (start > len_str))
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		sub = (char *)malloc(1);
+		sub[0] = 0;
+		return (sub);
 	}
-	if (*s == c)
-		return ((char *)s);
-	return ((void *)0);
+	size = len;
+	if (len > (len_str - start))
+		size = len_str - start;
+	sub = (char *)malloc(size + 1);
+	if (!sub)
+		return (NULL);
+	ft_strlcpy(sub, &s[start], size + 1);
+	return (sub);
 }

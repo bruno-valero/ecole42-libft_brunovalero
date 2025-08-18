@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:59 by brunofer         ###   ########.fr       */
+/*   Created: 2025/08/18 19:59:37 by brunofer          #+#    #+#             */
+/*   Updated: 2025/08/18 20:07:59 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libft.h"
+#include <stdio.h>
 
-int	ft_tolower(int c)
+int main()
 {
-	if (c >= 65 && c <= 90)
-		return (c + 32);
-	return (c);
+	char **str = ft_split("ola eu sou o bruno", ' ');
+	printf("[0]: %s\n", str[0]);
+	printf("[1]: %s\n", str[1]);
+	printf("[2]: %s\n", str[2]);
+	printf("[3]: %s\n", str[3]);
+	printf("[4]: %s\n", str[4]);
 }

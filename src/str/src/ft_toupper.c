@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:56 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_toupper(int c)
 {
-	int				size;
-	unsigned int	len_str;
-	char			*sub;
-
-	if ((!s && !start))
-		return (NULL);
-	len_str = (unsigned int)ft_strlen(s);
-	if (!s || (start > len_str))
-		return ((char *)ft_calloc(1, 1));
-	size = len;
-	if (len > (len_str - start))
-		size = len_str - start;
-	sub = (char *)ft_calloc(size + 1, 1);
-	if (!sub)
-		return (NULL);
-	ft_strlcpy(sub, &s[start], size + 1);
-	return (sub);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

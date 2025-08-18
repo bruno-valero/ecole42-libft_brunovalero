@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:47 by brunofer         ###   ########.fr       */
+/*   Created: 2025/08/18 09:57:13 by brunofer          #+#    #+#             */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
+#include <stdio.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+
+int	main(void)
 {
-	size_t	i;
-
-	if (!n)
-		return (0);
-	i = 0;
-	while ((s1[i] && s1[i] == s2[i]) && i < n - 1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	char **str = ft_split("ola eu sou o bruno", ' ');
+	printf("[0]: %s\n", str[0]);
+	printf("[1]: %s\n", str[1]);
+	printf("[2]: %s\n", str[2]);
+	printf("[3]: %s\n", str[3]);
+	printf("[4]: %s\n", str[4]);
+	free(str);
+	return (0);
 }

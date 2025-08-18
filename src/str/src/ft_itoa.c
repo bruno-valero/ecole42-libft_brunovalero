@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
 static int		nbrlen(long int nbr, int is_negative);
 static void		number_to_string(long int nbr, int nbr_len,
@@ -29,7 +29,7 @@ char	*ft_itoa(int n)
 	nbr_len = nbrlen(nbr, is_negative);
 	if (nbr == 0)
 		return (ft_strdup("0"));
-	str_nbr = ft_calloc(nbr_len + 1, 1);
+	str_nbr = malloc(nbr_len + 1);
 	if (!str_nbr)
 		return (NULL);
 	number_to_string(nbr, nbr_len, is_negative, str_nbr);
@@ -68,6 +68,7 @@ static void	number_to_string(long int nbr, int nbr_len,
 	last_digit = 0;
 	if (is_negative)
 		str_nbr[0] = '-';
+	str_nbr[nbr_len] = '\0';
 	while (nbr_len-- - is_negative)
 	{
 		last_digit = nbr % 10;

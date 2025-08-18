@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:42 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_isprint(int c)
 {
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	return (!(c <= 31 || c >= 127));
 }

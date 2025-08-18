@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/18 08:33:27 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:34 by brunofer         ###   ########.fr       */
+/*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	ft_isascii(int c)
 {
-	int		i;
-
-	if (!s || !f)
-		return ;
-	i = -1;
-	while (s[++i])
-		f(i, &s[i]);
+	return (c >= 0 && c <= 127);
 }

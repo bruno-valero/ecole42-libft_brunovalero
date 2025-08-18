@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   libstr.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 17:37:39 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 18:52:31 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:51:05 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#ifndef LIBSTR_H
+# define LIBSTR_H
 
 # ifndef STDLIB
 #  define STDLIB
@@ -22,12 +22,12 @@ typedef struct s_str
 {
 	int		length;
 	char	*data;
-} t_str;
+}	t_str;
 
 typedef struct s_str_matrix
 {
 
-} t_str_matrix;
+}	t_str_matrix;
 
 int		ft_atoi(const char *nptr);
 int		ft_isalnum(int c);

@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:51 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:49:21 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-char	*ft_strrchr(const char *s, int c)
+int	ft_atoi(const char *nptr)
 {
-	int	last_position;
-	int	i;
+	int		result;
+	int		i;
+	int		sign;
+	char	*nbstr;
 
-	c = c % 256;
-	last_position = -1;
+	nbstr = (char *)nptr;
+	while (*nbstr == ' ' || (*nbstr > 8 && *nbstr < 14))
+		nbstr++;
+	sign = 1;
+	if (nbstr[0] == '-' || nbstr[0] == '+')
+	{
+		if (nbstr[0] == '-')
+			sign = -1;
+		nbstr++;
+	}
+	result = 0;
 	i = -1;
-	while (s[++i])
-		if (s[i] == c)
-			last_position = i;
-	if (s[i] == c)
-			last_position = i;
-	if (last_position == -1)
-		return (NULL);
-	return ((char *)&s[last_position]);
+	while (ft_isdigit(nbstr[++i]))
+		result = result * 10 + (nbstr[i] - '0');
+	return (result * sign);
 }

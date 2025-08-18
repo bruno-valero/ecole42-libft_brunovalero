@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brunofer <brunofer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 07:02:52 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/17 17:49:18 by brunofer         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:44:07 by brunofer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libstr.h"
 
-int	ft_isdigit(int c)
+char	*ft_strdup(const char *s)
 {
-	return (c >= '0' && c <= '9');
+	char	*ptr;
+	int		i;
+
+	ptr = (char *)malloc(ft_strlen(s) + 1);
+	if (!ptr)
+		return (NULL);
+	i = -1;
+	while (s[++i])
+		ptr[i] = s[i];
+	ptr[i] = '\0';
+	return (ptr);
 }
