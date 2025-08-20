@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   libft_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: valero <valero@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/17 18:53:40 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/20 13:55:48 by valero           ###   ########.fr       */
+/*   Created: 2025/08/20 14:12:30 by valero            #+#    #+#             */
+/*   Updated: 2025/08/20 14:26:59 by valero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIST_H
-# define LIST_H
 
-#  include <stdlib.h>
+#ifndef LIBFT_UTILS_H
+# define LIBFT_UTILS_H
 
-typedef struct s_list_node
-{
-	void				*content;
-	struct s_list_node	*next;
-	struct s_list_node	*prev;
-}	t_list_node;
+#ifndef INT_MAX
+# define INT_MAX 2147483647
+#endif
 
-typedef struct s_list
-{
-	int			length;
-	t_list_node	*head;
-	t_list_node	*tail;
-}	t_list;
+#ifndef INT_MIN
+# define INT_MIN -2147483648
+#endif
+
+#ifndef LONG_MAX
+# define LONG_MAX 9223372036854775807
+#endif
+
+#ifndef LONG_MIN
+# define LONG_MIN -9223372036854775808
+#endif
+
+#ifndef ULONG_MAX
+# define ULONG_MAX 18446744073709551615
+#endif
 
 #endif
