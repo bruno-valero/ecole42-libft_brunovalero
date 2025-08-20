@@ -6,7 +6,7 @@ STACK = $(STACK_PATH)/libstack.a
 LIBSTR_PATH = src/libstr
 LIBSTR = $(LIBSTR_PATH)/libstr.a
 # ------------------------ Commands -------------------------------
-INCLUDES = -I $(STACK_PATH)/includes -I $(LIBSTR_PATH)/includes
+INCLUDES = -I ./includes -I $(STACK_PATH)/includes -I $(LIBSTR_PATH)/includes
 CC = cc
 CFLAGS = -Wall -Werror -Wextra $(INCLUDES)
 SLEEP = 0.05
@@ -27,41 +27,41 @@ all: $(DEPENDENCY_LIBS) $(OBJ) $(DEPENDENCY_OBJS) $(NAME)
 
 $(NAME): $(DEPENDENCY_INCLUDES) $(OBJ_FILES)
 # -------------- copying includes -----------------------------------------
-	@echo ">> copying inludes from './$(STACK_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
+	@echo ">> copying inludes from './libft/$(STACK_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
 	@cp -rf $(STACK_PATH)/includes/* $(DEPENDENCY_INCLUDES)
-	@echo ">> copying inludes from './$(LIBSTR_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
+	@echo ">> copying inludes from './libft/$(LIBSTR_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
 	@cp -rf $(LIBSTR_PATH)/includes/* $(DEPENDENCY_INCLUDES)
 # -------------- extracting 'files.o' -----------------------------------------
-	@echo ">> extracting 'files.o' from '$(STACK)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
+	@echo ">> extracting 'files.o' from './libft/$(STACK)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
 	@ar x $(STACK) --output $(DEPENDENCY_OBJS)
-	@echo ">> extracting 'files.o' from '$(LIBSTR)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
+	@echo ">> extracting 'files.o' from './libft/$(LIBSTR)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
 	@ar x $(LIBSTR) --output $(DEPENDENCY_OBJS)
 # -------------- compiling 'libft.a' -----------------------------------------
-	@echo ">> compiling $@..." && sleep $(SLEEP)
+	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
 	@ar rcs $@ $(OBJ_FILES) $(DEPENDENCY_OBJS)/*.o
 # ****************************************************
 
 # ------------- Dependency libs -------------
 $(STACK):
-	@echo ">> compiling $@..." && sleep $(SLEEP)
+	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
 	@make -s -C $(STACK_PATH)
 
 $(LIBSTR):
-	@echo ">> compiling $@..." && sleep $(SLEEP)
+	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
 	@make -s -C $(LIBSTR_PATH)
 # --------------------------------------------
 
 # ------------- Obrigatory files on root -------------
 $(OBJ):
-	@echo ">> creatting ./$@ folder..." && sleep $(SLEEP)
+	@echo ">> creatting ./libft/$@ folder..." && sleep $(SLEEP)
 	@mkdir $(OBJ)
 
 $(DEPENDENCY_OBJS):
-	@echo ">> creatting ./$@ folder..." && sleep $(SLEEP)
+	@echo ">> creatting ./libft/$@ folder..." && sleep $(SLEEP)
 	@mkdir $(DEPENDENCY_OBJS)
 
 $(DEPENDENCY_INCLUDES):
-	@echo ">> creatting ./$@ folder..." && sleep $(SLEEP)
+	@echo ">> creatting ./libft/$@ folder..." && sleep $(SLEEP)
 	@mkdir $(DEPENDENCY_INCLUDES)
 # -----------------------------------------------------
 
@@ -70,13 +70,19 @@ $(OBJ)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	@echo ">> cleanning './libft/$(STACK_PATH)'..." && sleep $(SLEEP)
 	@make -s -C $(STACK_PATH) clean
+	@echo ">> cleanning './libft/$(LIBSTR_PATH)'..." && sleep $(SLEEP)
 	@make -s -C $(LIBSTR_PATH) clean
+	@echo ">> cleanning './libft/'..." && sleep $(SLEEP)
 	@rm -rf $(OBJ) $(DEPENDENCY_OBJS) $(DEPENDENCY_INCLUDES)
 
 fclean: clean
+	@echo ">> deletting './libft/$(STACK)'..." && sleep $(SLEEP)
 	@make -s -C $(STACK_PATH) fclean
+	@echo ">> deletting './libft/$(LIBSTR)'..." && sleep $(SLEEP)
 	@make -s -C $(LIBSTR_PATH) fclean
+	@echo ">> deletting './libft/$(NAME)'..." && sleep $(SLEEP)
 	@rm -rf $(NAME)
 
 re: fclean all
