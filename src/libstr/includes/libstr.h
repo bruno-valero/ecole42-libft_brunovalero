@@ -6,7 +6,7 @@
 /*   By: valero <valero@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 17:37:39 by brunofer          #+#    #+#             */
-/*   Updated: 2025/08/20 17:59:58 by valero           ###   ########.fr       */
+/*   Updated: 2025/08/20 23:00:10 by valero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int			ft_isprint(int c);
 char		*ft_itoa(int n);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
+void		*destroy_char_matrix(char ***char_matrix_ref);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *s);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
