@@ -4,6 +4,7 @@
 		"string.h": "c",
 		"stdlib.h": "c",
 		"string_view": "c",
-		"libstr.h": "c"
+		"libstr.h": "c",
+		"libft_utils.h": "c"
 	}
 }
