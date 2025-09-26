@@ -1,3 +1,9 @@
+BOLD=\033[1m
+RESET=\033[0m
+LIGHT_RED=\033[91m
+LIGHT_GREEN=\033[92m
+LIGHT_CYAN=\033[96m
+
 NAME = libft.a
 # ------------------------ Dependencies -------------------------------
 STACK_PATH = src/lists/stack
@@ -11,7 +17,7 @@ LIBGNL = $(LIBGNL_PATH)/libgnl.a
 # ------------------------ Commands -------------------------------
 INCLUDES = -I ./includes -I $(STACK_PATH)/includes -I $(LIBSTR_PATH)/includes -I $(LIBGNL_PATH)/includes
 CC = cc
-CFLAGS = -Wall -Werror -Wextra $(INCLUDES)
+CFLAGS = -Wall -Werror -Wextra -g3 $(INCLUDES)
 SLEEP = 0.07
 # ------------------------ Paths / files -------------------------------
 SRC_FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
@@ -30,49 +36,49 @@ all: $(DEPENDENCY_LIBS) $(OBJ) $(DEPENDENCY_OBJS) $(NAME)
 
 $(NAME): $(DEPENDENCY_INCLUDES) $(OBJ_FILES)
 # -------------- copying includes -----------------------------------------
-	@echo ">> copying inludes from './libft/$(STACK_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)copying inludes$(RESET) from '$(LIGHT_CYAN)./libft/$(STACK_PATH)$(RESET)' to '$(LIGHT_CYAN)$(DEPENDENCY_INCLUDES)$(RESET)'..." && sleep $(SLEEP)
 	@cp -rf $(STACK_PATH)/includes/* $(DEPENDENCY_INCLUDES)
-	@echo ">> copying inludes from './libft/$(LIBSTR_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)copying inludes$(RESET) from '$(LIGHT_CYAN)./libft/$(LIBSTR_PATH)$(RESET)' to '$(LIGHT_CYAN)$(DEPENDENCY_INCLUDES)$(RESET)'..." && sleep $(SLEEP)
 	@cp -rf $(LIBSTR_PATH)/includes/* $(DEPENDENCY_INCLUDES)
-	@echo ">> copying inludes from './libft/$(LIBGNL_PATH)' to '$(DEPENDENCY_INCLUDES)'..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)copying inludes$(RESET) from '$(LIGHT_CYAN)./libft/$(LIBGNL_PATH)$(RESET)' to '$(LIGHT_CYAN)$(DEPENDENCY_INCLUDES)$(RESET)'..." && sleep $(SLEEP)
 	@cp -rf $(LIBGNL_PATH)/includes/* $(DEPENDENCY_INCLUDES)
 # -------------- extracting 'files.o' -----------------------------------------
-	@echo ">> extracting 'files.o' from './libft/$(STACK)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)extracting 'files.o'$(RESET) from '$(LIGHT_CYAN)./libft/$(STACK)$(RESET)' to '$(LIGHT_CYAN)$(DEPENDENCY_OBJS)$(RESET)'..." && sleep $(SLEEP)
 	@ar x $(STACK) --output $(DEPENDENCY_OBJS)
-	@echo ">> extracting 'files.o' from './libft/$(LIBSTR)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)extracting 'files.o'$(RESET) from '$(LIGHT_CYAN)./libft/$(LIBSTR)$(RESET)' to '$(LIGHT_CYAN)$(DEPENDENCY_OBJS)$(RESET)'..." && sleep $(SLEEP)
 	@ar x $(LIBSTR) --output $(DEPENDENCY_OBJS)
-	@echo ">> extracting 'files.o' from './libft/$(LIBGNL)' to '$(DEPENDENCY_OBJS)'..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)extracting 'files.o'$(RESET) from '$(LIGHT_CYAN)./libft/$(LIBGNL)$(RESET)' to '$(LIGHT_CYAN)$(DEPENDENCY_OBJS)$(RESET)'..." && sleep $(SLEEP)
 	@ar x $(LIBGNL) --output $(DEPENDENCY_OBJS)
 # -------------- compiling 'libft.a' -----------------------------------------
-	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
+	@echo "$(LIGHT_GREEN)>> $(BOLD)compiling$(RESET) $(LIGHT_CYAN)./libft/$@$(RESET)..." && sleep $(SLEEP)
 	@ar rcs $@ $(OBJ_FILES) $(DEPENDENCY_OBJS)/*.o
 # ****************************************************
 
 # ------------- Dependency libs -------------
 $(STACK):
-	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
+	@echo "$(LIGHT_GREEN)>> $(BOLD)compiling$(RESET) $(LIGHT_CYAN)./libft/$@$(RESET)..." && sleep $(SLEEP)
 	@make -s -C $(STACK_PATH)
 
 $(LIBSTR):
-	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
+	@echo "$(LIGHT_GREEN)>> $(BOLD)compiling$(RESET) $(LIGHT_CYAN)./libft/$@$(RESET)..." && sleep $(SLEEP)
 	@make -s -C $(LIBSTR_PATH)
 
 $(LIBGNL):
-	@echo ">> compiling ./libft/$@..." && sleep $(SLEEP)
+	@echo "$(LIGHT_GREEN)>> $(BOLD)compiling$(RESET) $(LIGHT_CYAN)./libft/$@$(RESET)..." && sleep $(SLEEP)
 	@make -s -C $(LIBGNL_PATH)
 # --------------------------------------------
 
 # ------------- Obrigatory files on root -------------
 $(OBJ):
-	@echo ">> creatting ./libft/$@ folder..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)creatting $(LIGHT_CYAN)./libft/$@$(RESET) folder..." && sleep $(SLEEP)
 	@mkdir $(OBJ)
 
 $(DEPENDENCY_OBJS):
-	@echo ">> creatting ./libft/$@ folder..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)creatting $(LIGHT_CYAN)./libft/$@$(RESET) folder..." && sleep $(SLEEP)
 	@mkdir $(DEPENDENCY_OBJS)
 
 $(DEPENDENCY_INCLUDES):
-	@echo ">> creatting ./libft/$@ folder..." && sleep $(SLEEP)
+	@echo ">> $(BOLD)creatting $(LIGHT_CYAN)./libft/$@$(RESET) folder..." && sleep $(SLEEP)
 	@mkdir $(DEPENDENCY_INCLUDES)
 # -----------------------------------------------------
 
@@ -81,23 +87,23 @@ $(OBJ)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo ">> cleanning './libft/$(STACK_PATH)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)cleanning$(RESET) '$(LIGHT_CYAN)./libft/$(STACK_PATH)$(RESET)'..." && sleep $(SLEEP)
 	@make -s -C $(STACK_PATH) clean
-	@echo ">> cleanning './libft/$(LIBSTR_PATH)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)cleanning$(RESET) '$(LIGHT_CYAN)./libft/$(LIBSTR_PATH)$(RESET)'..." && sleep $(SLEEP)
 	@make -s -C $(LIBSTR_PATH) clean
-	@echo ">> cleanning './libft/$(LIBGNL_PATH)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)cleanning$(RESET) '$(LIGHT_CYAN)./libft/$(LIBGNL_PATH)$(RESET)'..." && sleep $(SLEEP)
 	@make -s -C $(LIBGNL_PATH) clean
-	@echo ">> cleanning './libft/'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)cleanning$(RESET) '$(LIGHT_CYAN)./libft/$(RESET)'..." && sleep $(SLEEP)
 	@rm -rf $(OBJ) $(DEPENDENCY_OBJS) $(DEPENDENCY_INCLUDES)
 
 fclean: clean
-	@echo ">> deletting './libft/$(STACK)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)deletting$(RESET) '$(LIGHT_CYAN)./libft/$(STACK)$(RESET)'..." && sleep $(SLEEP)
 	@make -s -C $(STACK_PATH) fclean
-	@echo ">> deletting './libft/$(LIBSTR)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)deletting$(RESET) '$(LIGHT_CYAN)./libft/$(LIBSTR)$(RESET)'..." && sleep $(SLEEP)
 	@make -s -C $(LIBSTR_PATH) fclean
-	@echo ">> deletting './libft/$(NAME)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)deletting$(RESET) '$(LIGHT_CYAN)./libft/$(NAME)$(RESET)'..." && sleep $(SLEEP)
 	@make -s -C $(LIBGNL_PATH) fclean
-	@echo ">> deletting './libft/$(NAME)'..." && sleep $(SLEEP)
+	@echo "$(LIGHT_RED)>> $(BOLD)deletting$(RESET) '$(LIGHT_CYAN)./libft/$(NAME)$(RESET)'..." && sleep $(SLEEP)
 	@rm -rf $(NAME)
 
 re: fclean all
